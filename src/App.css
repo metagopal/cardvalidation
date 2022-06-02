@@ -1,0 +1,78 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  
+}
+
+.card-box{
+  width:550px;
+  padding:50px;
+  background:#cecece;
+  margin:50px auto;
+}
+
+.card-box .input-group{
+    position: relative;
+   
+}
+.card-box .input-group + .input-group{
+  margin-top:30px;
+
+}
+.card-box .card-input, .card-box .card-input:focus{
+  border-radius: 10px;
+  background: 
+    linear-gradient(white, white) padding-box,
+    linear-gradient(to right, darkblue, darkorchid) border-box;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  height:55px;
+  padding:5px 75px 5px 15px;
+  width:100%;
+  
+}
+.card-box .card-input:focus{
+  outline: none;
+  box-shadow: none;
+}
+.card-box .card-icon{
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
+  right:10px;
+  width:40px;
+  height:20px;
+}
+.card-box .card-icon img{
+  height:20px;
+  width:40px;
+  object-fit: cover;
+}
+
+.card-box .btn-submit{
+  border:solid 1px #f3f3f3;
+  height:40px;
+  font-size:16px;
+  width:200px; 
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.error{
+  color:#ff0000;
+}
+.success{
+  color:green;
+}
+.clearTextbox{
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
+  right:10px;
+  width:20px;
+  height:20px;
+}
+.clearTextbox img{
+  width:20px;
+}
