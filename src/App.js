@@ -13,24 +13,14 @@ import close from './assets/images/close.png'
 
 
 function App() {
-
-
   const [getCardType, setGetCardType] = useState(blank);
   const [cardNumber, setCardNumber] = useState("");
   const [errors, setErrors] = useState();
   const [isValid, setIsValid] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [maxLength, setMaxLength] = useState(15)
-
-
-  
-
-
-
   const validate = (cardNumber) => {
     let errors = {}
-
-
     if (!cardNumber) {
       setErrorMsg("Please Enter Card Number");
       setIsValid(false)
@@ -54,27 +44,18 @@ function App() {
       cardTotal += cardDigits[i];
       tempNo = !tempNo;
     }
-
     if (cardTotal % 10 == 0) {
-
       errors = ""
       setIsValid(true)
     } else {
       errors = "Invalid Card Number"
-      //setErrorMsg("Invalid Card Number")
       setIsValid(false)
-
     }
     return errors;
   }
 
   const creditCardType = (cardNumber) => {
-
-
     let cardName = `${blank}`;
-
-
-
     if (cardNumber.startsWith(4)) {
       cardName = `${visa}`;
       setMaxLength(19)
@@ -91,33 +72,23 @@ function App() {
       cardName = `${master}`;
       setMaxLength(19)
     }
-
-
-
     return cardName;
   }
-
   const handleCardNumber = (e) => {
     let cardNumber = e.target.value;
     cardNumber = cardNumber.replace(/\W/gi, '').replace(/(.{4})/g, '$1 ').trim();
-
-    //console.log(cardNumber);
-
     setCardNumber(cardNumber);
     setGetCardType(creditCardType(cardNumber))
-
   }
   useEffect(() => {
     handleSubmit();
-
   }, [cardNumber])
 
   const handleSubmit = (e) => {
-    
     if (cardNumber.length > 13) {
       setErrors(validate(cardNumber));
     }
-    else{
+    else {
       setErrors("")
     }
   }
@@ -144,9 +115,6 @@ function App() {
               }
             }}
           />
-
-
-
           <>
             <span className="card-icon">
               <img
@@ -155,23 +123,18 @@ function App() {
                 alt={getCardType} />
             </span>
           </>
-
           {errors &&
-            <a href="#!" onClick={handleClear} className="clearTextbox" >
-              <img src={close} alt="" />
-            </a>
-
+            <>
+              <a href="#!" onClick={handleClear} className="clearTextbox" >
+                <img src={close} alt="" />
+              </a>
+              <p className='error'>{errors}</p>
+            </>
           }
-
         </div>
-        {errors && <p className='error'>{errors}</p>}
-
         {isValid &&
           <p className='success'>Valid Card Number</p>
-         
         }
-
-
       </form>
     </div>
   );
