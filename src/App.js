@@ -15,11 +15,16 @@ import close from './assets/images/close.png'
 function App() {
 
 
-  const [getCardType, setGetCardType] = useState();
+  const [getCardType, setGetCardType] = useState(blank);
   const [cardNumber, setCardNumber] = useState("");
   const [errors, setErrors] = useState();
-  const [isValid, setIsValid] = useState(true);
+  const [isValid, setIsValid] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [maxLength, setMaxLength] = useState(15)
+
+
+  
+
 
 
   const validate = (cardNumber) => {
@@ -52,34 +57,39 @@ function App() {
 
     if (cardTotal % 10 == 0) {
 
-      setErrorMsg("Valid Card Number")
+      errors = ""
       setIsValid(true)
     } else {
-
-      setErrorMsg("Invalid Card Number")
+      errors = "Invalid Card Number"
+      //setErrorMsg("Invalid Card Number")
       setIsValid(false)
+
     }
     return errors;
   }
 
   const creditCardType = (cardNumber) => {
-    
+
 
     let cardName = `${blank}`;
 
-   
+
 
     if (cardNumber.startsWith(4)) {
       cardName = `${visa}`;
+      setMaxLength(19)
     }
     else if (cardNumber.startsWith(34) || cardNumber.startsWith(37)) {
       cardName = `${american}`;
+      setMaxLength(18)
     }
     else if (cardNumber.startsWith(6011)) {
       cardName = `${discover}`;
+      setMaxLength(19)
     }
     else if (cardNumber.startsWith(51) || cardNumber.startsWith(52) || cardNumber.startsWith(53) || cardNumber.startsWith(54) || cardNumber.startsWith(55)) {
       cardName = `${master}`;
+      setMaxLength(19)
     }
 
 
@@ -99,11 +109,16 @@ function App() {
   }
   useEffect(() => {
     handleSubmit();
+
   }, [cardNumber])
 
   const handleSubmit = (e) => {
+    
     if (cardNumber.length > 13) {
       setErrors(validate(cardNumber));
+    }
+    else{
+      setErrors("")
     }
   }
   const handleClear = () => {
@@ -116,12 +131,12 @@ function App() {
     <div className="App">
       <form className="card-box">
         <div className="input-group">
+
           <input type="tel"
-            maxLength="19"
+            maxLength={maxLength}
             className="card-input"
             onChange={handleCardNumber}
             value={cardNumber}
-            placeholder="0000 0000 0000 0000"
 
             onKeyPress={(event) => {
               if (!/[0-9]/.test(event.key)) {
@@ -131,25 +146,30 @@ function App() {
           />
 
 
-          {
-            (errors && isValid ==true) ?
-              <span className="card-icon">
-                <img
-                  src=
-                  {getCardType ? `${getCardType}` : blank}
-                  alt={getCardType} />
-              </span>
-              :
-              <>
-                <a href="#!" onClick={handleClear} className="clearTextbox" >
-                  <img src={close} alt="" />
-                </a>
-              </>
 
+          <>
+            <span className="card-icon">
+              <img
+                src=
+                {getCardType}
+                alt={getCardType} />
+            </span>
+          </>
+
+          {errors &&
+            <a href="#!" onClick={handleClear} className="clearTextbox" >
+              <img src={close} alt="" />
+            </a>
 
           }
+
         </div>
-        {errors && <p className={isValid ? 'success' : 'error'}>{errorMsg}</p>}
+        {errors && <p className='error'>{errors}</p>}
+
+        {isValid &&
+          <p className='success'>Valid Card Number</p>
+         
+        }
 
 
       </form>

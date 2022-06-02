@@ -30,6 +30,8 @@
   height:55px;
   padding:5px 75px 5px 15px;
   width:100%;
+  font-size:16px;
+  font-family: Arial, Helvetica, sans-serif;
   
 }
 .card-box .card-input:focus{
@@ -70,8 +72,10 @@
   top:50%;
   transform: translateY(-50%);
   right:10px;
-  width:20px;
-  height:20px;
+  width: 40px;
+  height: 20px;
+  background: white;
+  text-align: right;
 }
 .clearTextbox img{
   width:20px;
